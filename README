@@ -1,0 +1,273 @@
+Use rayswarm-core to connet to agent
+
+     ╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+     │ Plan: Create magentic-market-verticals Gem                                                                         │
+     │                                                                                                                    │
+     │ Context                                                                                                            │
+     │                                                                                                                    │
+     │ Vertical market definitions are scattered and inconsistent across services:                                        │
+     │ - marketplace (Category): 7 verticals — finance healthcare energy industrial consumer demographic academic         │
+     │ - partner (Partner): 8 verticals — finance healthcare energy retail manufacturing technology education government  │
+     │ - developer (Certification): 10 verticals — finance healthcare legal education ecommerce manufacturing logistics   │
+     │ real_estate human_resources customer_service                                                                       │
+     │ - governance (seeds): only 4 — healthcare finance education government                                             │
+     │                                                                                                                    │
+     │ This causes data integrity problems and makes it impossible to reason about verticals cross-service. The fix is a  │
+     │ single source-of-truth gem that also maps each subcategory to a rayswarm-MARKET gem.                               │
+     │                                                                                                                    │
+     │ Approach: Plain Ruby Gem (like mcp-culture)                                                                        │
+     │                                                                                                                    │
+     │ Not a Rails engine — this is pure data/configuration with an optional seed helper. Zero framework dependencies.    │
+     │                                                                                                                    │
+     │ Gem Structure                                                                                                      │
+     │                                                                                                                    │
+     │ submodules/magentic-market-verticals/                                                                              │
+     │ ├── VERSION                          # "0.1.0"                                                                     │
+     │ ├── magentic-market-verticals.gemspec                                                                              │
+     │ ├── Gemfile                                                                                                        │
+     │ ├── LICENSE.txt                                                                                                    │
+     │ ├── lib/                                                                                                           │
+     │ │   ├── magentic-market-verticals.rb           # require entrypoint                                                │
+     │ │   └── magentic_market/                                                                                           │
+     │ │       ├── verticals.rb                       # Main module + convenience methods                                 │
+     │ │       └── verticals/                                                                                             │
+     │ │           ├── version.rb                                                                                         │
+     │ │           ├── vertical.rb                    # Value object                                                      │
+     │ │           ├── category.rb                    # Value object                                                      │
+     │ │           ├── ontology_standard.rb           # Value object                                                      │
+     │ │           ├── rayswarm_mapping.rb            # Value object                                                      │
+     │ │           ├── registry.rb                    # Central lookup store                                              │
+     │ │           ├── seed_helper.rb                 # Optional Rails seeding (not auto-required)                        │
+     │ │           └── data/                                                                                              │
+     │ │               ├── finance.rb                                                                                     │
+     │ │               ├── healthcare.rb                                                                                  │
+     │ │               ├── energy.rb                                                                                      │
+     │ │               ├── industrial.rb                                                                                  │
+     │ │               ├── consumer.rb                                                                                    │
+     │ │               ├── demographic.rb                                                                                 │
+     │ │               └── academic.rb                                                                                    │
+     │ └── test/                                                                                                          │
+     │     ├── test_helper.rb                                                                                             │
+     │     └── magentic_market/                                                                                           │
+     │         ├── verticals_test.rb                                                                                      │
+     │         ├── registry_test.rb                                                                                       │
+     │         └── rayswarm_mapping_test.rb                                                                               │
+     │                                                                                                                    │
+     │ Value Objects                                                                                                      │
+     │ Class: Vertical                                                                                                    │
+     │ Key Fields: slug, name, description, icon, ontology_standards[], categories[]                                      │
+     │ Purpose: Top-level domain                                                                                          │
+     │ ────────────────────────────────────────                                                                           │
+     │ Class: Category                                                                                                    │
+     │ Key Fields: slug, name, description, vertical_slug, rayswarm_mappings[]                                            │
+     │ Purpose: Subcategory within a vertical                                                                             │
+     │ ────────────────────────────────────────                                                                           │
+     │ Class: OntologyStandard                                                                                            │
+     │ Key Fields: name, full_name, iri, governance_body                                                                  │
+     │ Purpose: Industry standard mapping                                                                                 │
+     │ ────────────────────────────────────────                                                                           │
+     │ Class: RayswarmMapping                                                                                             │
+     │ Key Fields: gem_name, category_slug, vertical_slug, description                                                    │
+     │ Purpose: Forward-declares a rayswarm gem                                                                           │
+     │ All value objects are frozen/immutable after construction. Each has a to_h method.                                 │
+     │                                                                                                                    │
+     │ Registry API                                                                                                       │
+     │                                                                                                                    │
+     │ MagenticMarket::Verticals.all              # => [Vertical, ...]                                                    │
+     │ MagenticMarket::Verticals.slugs            # => ["finance", "healthcare", ...]                                     │
+     │ MagenticMarket::Verticals.find("finance")  # => Vertical                                                           │
+     │ MagenticMarket::Verticals.categories       # => all 42 Category objects                                            │
+     │ MagenticMarket::Verticals.rayswarm_gems    # => all 42 RayswarmMapping objects                                     │
+     │                                                                                                                    │
+     │ Rayswarm Gem Mapping (all 42)                                                                                      │
+     │                                                                                                                    │
+     │ Finance (FIBO, ACORD, FIB-DM)                                                                                      │
+     │ ┌───────────────────┬──────────────────────────────┐                                                               │
+     │ │    Subcategory    │         Rayswarm Gem         │                                                               │
+     │ ├───────────────────┼──────────────────────────────┤                                                               │
+     │ │ Trading           │ rayswarm-algorithmic-trading │                                                               │
+     │ ├───────────────────┼──────────────────────────────┤                                                               │
+     │ │ Risk Management   │ rayswarm-financial-risk      │                                                               │
+     │ ├───────────────────┼──────────────────────────────┤                                                               │
+     │ │ Compliance        │ rayswarm-kyc-aml-compliance  │                                                               │
+     │ ├───────────────────┼──────────────────────────────┤                                                               │
+     │ │ Insurance         │ rayswarm-insurance-claims    │                                                               │
+     │ ├───────────────────┼──────────────────────────────┤                                                               │
+     │ │ Wealth Management │ rayswarm-wealth-advisory     │                                                               │
+     │ ├───────────────────┼──────────────────────────────┤                                                               │
+     │ │ Fraud Detection   │ rayswarm-fraud-detection     │                                                               │
+     │ └───────────────────┴──────────────────────────────┘                                                               │
+     │ Healthcare (HL7 FHIR, SNOMED CT, LOINC)                                                                            │
+     │ ┌───────────────────────────┬─────────────────────────────┐                                                        │
+     │ │        Subcategory        │        Rayswarm Gem         │                                                        │
+     │ ├───────────────────────────┼─────────────────────────────┤                                                        │
+     │ │ Clinical Decision Support │ rayswarm-clinical-decisions │                                                        │
+     │ ├───────────────────────────┼─────────────────────────────┤                                                        │
+     │ │ Medical Imaging           │ rayswarm-medical-imaging    │                                                        │
+     │ ├───────────────────────────┼─────────────────────────────┤                                                        │
+     │ │ Claims Processing         │ rayswarm-healthcare-claims  │                                                        │
+     │ ├───────────────────────────┼─────────────────────────────┤                                                        │
+     │ │ Drug Discovery            │ rayswarm-drug-discovery     │                                                        │
+     │ ├───────────────────────────┼─────────────────────────────┤                                                        │
+     │ │ Patient Engagement        │ rayswarm-patient-engagement │                                                        │
+     │ ├───────────────────────────┼─────────────────────────────┤                                                        │
+     │ │ Population Health         │ rayswarm-population-health  │                                                        │
+     │ └───────────────────────────┴─────────────────────────────┘                                                        │
+     │ Energy (OSDU, CIM, OEO)                                                                                            │
+     │ ┌───────────────────────┬─────────────────────────────────┐                                                        │
+     │ │      Subcategory      │          Rayswarm Gem           │                                                        │
+     │ ├───────────────────────┼─────────────────────────────────┤                                                        │
+     │ │ Exploration           │ rayswarm-subsurface-exploration │                                                        │
+     │ ├───────────────────────┼─────────────────────────────────┤                                                        │
+     │ │ Production            │ rayswarm-reservoir-optimization │                                                        │
+     │ ├───────────────────────┼─────────────────────────────────┤                                                        │
+     │ │ Grid Management       │ rayswarm-grid-management        │                                                        │
+     │ ├───────────────────────┼─────────────────────────────────┤                                                        │
+     │ │ Renewable Forecasting │ rayswarm-renewable-forecasting  │                                                        │
+     │ ├───────────────────────┼─────────────────────────────────┤                                                        │
+     │ │ Asset Management      │ rayswarm-energy-assets          │                                                        │
+     │ ├───────────────────────┼─────────────────────────────────┤                                                        │
+     │ │ Energy Trading        │ rayswarm-commodity-futures      │                                                        │
+     │ └───────────────────────┴─────────────────────────────────┘                                                        │
+     │ Industrial (ISA-95, IOF)                                                                                           │
+     │ ┌─────────────────────────┬────────────────────────────────┐                                                       │
+     │ │       Subcategory       │          Rayswarm Gem          │                                                       │
+     │ ├─────────────────────────┼────────────────────────────────┤                                                       │
+     │ │ Predictive Quality      │ rayswarm-predictive-quality    │                                                       │
+     │ ├─────────────────────────┼────────────────────────────────┤                                                       │
+     │ │ Production Optimization │ rayswarm-production-scheduling │                                                       │
+     │ ├─────────────────────────┼────────────────────────────────┤                                                       │
+     │ │ Supply Chain            │ rayswarm-supply-chain          │                                                       │
+     │ ├─────────────────────────┼────────────────────────────────┤                                                       │
+     │ │ Robotics                │ rayswarm-industrial-robotics   │                                                       │
+     │ ├─────────────────────────┼────────────────────────────────┤                                                       │
+     │ │ Digital Twin            │ rayswarm-digital-twin          │                                                       │
+     │ ├─────────────────────────┼────────────────────────────────┤                                                       │
+     │ │ Equipment Health        │ rayswarm-equipment-health      │                                                       │
+     │ └─────────────────────────┴────────────────────────────────┘                                                       │
+     │ Consumer (GS1)                                                                                                     │
+     │ ┌────────────────────┬─────────────────────────────────┐                                                           │
+     │ │    Subcategory     │          Rayswarm Gem           │                                                           │
+     │ ├────────────────────┼─────────────────────────────────┤                                                           │
+     │ │ Personalization    │ rayswarm-personalization        │                                                           │
+     │ ├────────────────────┼─────────────────────────────────┤                                                           │
+     │ │ Pricing            │ rayswarm-dynamic-pricing        │                                                           │
+     │ ├────────────────────┼─────────────────────────────────┤                                                           │
+     │ │ Inventory          │ rayswarm-inventory-optimization │                                                           │
+     │ ├────────────────────┼─────────────────────────────────┤                                                           │
+     │ │ Customer Analytics │ rayswarm-customer-analytics     │                                                           │
+     │ ├────────────────────┼─────────────────────────────────┤                                                           │
+     │ │ Retail Execution   │ rayswarm-retail-execution       │                                                           │
+     │ ├────────────────────┼─────────────────────────────────┤                                                           │
+     │ │ Advertising        │ rayswarm-ad-optimization        │                                                           │
+     │ └────────────────────┴─────────────────────────────────┘                                                           │
+     │ Demographic (Schema.org, FOAF, vCard)                                                                              │
+     │ ┌──────────────────────┬───────────────────────────────┐                                                           │
+     │ │     Subcategory      │         Rayswarm Gem          │                                                           │
+     │ ├──────────────────────┼───────────────────────────────┤                                                           │
+     │ │ Census Analysis      │ rayswarm-census-analysis      │                                                           │
+     │ ├──────────────────────┼───────────────────────────────┤                                                           │
+     │ │ Economic Forecasting │ rayswarm-economic-forecasting │                                                           │
+     │ ├──────────────────────┼───────────────────────────────┤                                                           │
+     │ │ Social Programs      │ rayswarm-social-programs      │                                                           │
+     │ ├──────────────────────┼───────────────────────────────┤                                                           │
+     │ │ Public Health        │ rayswarm-public-health        │                                                           │
+     │ ├──────────────────────┼───────────────────────────────┤                                                           │
+     │ │ Policy Simulation    │ rayswarm-policy-simulation    │                                                           │
+     │ ├──────────────────────┼───────────────────────────────┤                                                           │
+     │ │ Survey Analysis      │ rayswarm-survey-analysis      │                                                           │
+     │ └──────────────────────┴───────────────────────────────┘                                                           │
+     │ Academic (1EdTech, VIVO, CERIF, ORCID)                                                                             │
+     │ ┌─────────────────────────┬──────────────────────────────────┐                                                     │
+     │ │       Subcategory       │           Rayswarm Gem           │                                                     │
+     │ ├─────────────────────────┼──────────────────────────────────┤                                                     │
+     │ │ Research Discovery      │ rayswarm-research-discovery      │                                                     │
+     │ ├─────────────────────────┼──────────────────────────────────┤                                                     │
+     │ │ Adaptive Learning       │ rayswarm-adaptive-learning       │                                                     │
+     │ ├─────────────────────────┼──────────────────────────────────┤                                                     │
+     │ │ Student Success         │ rayswarm-student-success         │                                                     │
+     │ ├─────────────────────────┼──────────────────────────────────┤                                                     │
+     │ │ Curriculum Mapping      │ rayswarm-curriculum-mapping      │                                                     │
+     │ ├─────────────────────────┼──────────────────────────────────┤                                                     │
+     │ │ Library Services        │ rayswarm-library-services        │                                                     │
+     │ ├─────────────────────────┼──────────────────────────────────┤                                                     │
+     │ │ Institutional Analytics │ rayswarm-institutional-analytics │                                                     │
+     │ └─────────────────────────┴──────────────────────────────────┘                                                     │
+     │ Service Migration                                                                                                  │
+     │                                                                                                                    │
+     │ 1. marketplace (primary consumer)                                                                                  │
+     │                                                                                                                    │
+     │ - Gemfile: add gem "magentic-market-verticals"                                                                     │
+     │ - app/models/category.rb: VERTICALS = MagenticMarket::Verticals.slugs.freeze                                       │
+     │ - db/seeds.rb: replace 130-line hash with SeedHelper.seed_categories!(Category)                                    │
+     │                                                                                                                    │
+     │ 2. partner                                                                                                         │
+     │                                                                                                                    │
+     │ - app/models/partner.rb: VERTICALS = MagenticMarket::Verticals.slugs.freeze                                        │
+     │ - Data migration: retail→consumer, manufacturing→industrial, education→academic, government→demographic,           │
+     │ technology→nil                                                                                                     │
+     │                                                                                                                    │
+     │ 3. developer                                                                                                       │
+     │                                                                                                                    │
+     │ - app/models/certification.rb: VERTICALS = MagenticMarket::Verticals.slugs.freeze                                  │
+     │ - Data migration: legal→nil, education→academic, ecommerce→consumer, manufacturing→industrial,                     │
+     │ logistics→industrial, real_estate→nil, human_resources→nil, customer_service→nil                                   │
+     │                                                                                                                    │
+     │ 4. governance                                                                                                      │
+     │                                                                                                                    │
+     │ - db/seeds.rb: replace 4-vertical loop with SeedHelper.seed_committees!(Committee) (creates all 7)                 │
+     │                                                                                                                    │
+     │ 5. CLAUDE.md                                                                                                       │
+     │                                                                                                                    │
+     │ - Add magentic-market-verticals to Crosscutting Concerns table                                                     │
+     │                                                                                                                    │
+     │ Files to Create (in submodules/magentic-market-verticals/)                                                         │
+     │                                                                                                                    │
+     │ 1. VERSION                                                                                                         │
+     │ 2. magentic-market-verticals.gemspec                                                                               │
+     │ 3. Gemfile                                                                                                         │
+     │ 4. LICENSE.txt                                                                                                     │
+     │ 5. lib/magentic-market-verticals.rb                                                                                │
+     │ 6. lib/magentic_market/verticals.rb                                                                                │
+     │ 7. lib/magentic_market/verticals/version.rb                                                                        │
+     │ 8. lib/magentic_market/verticals/vertical.rb                                                                       │
+     │ 9. lib/magentic_market/verticals/category.rb                                                                       │
+     │ 10. lib/magentic_market/verticals/ontology_standard.rb                                                             │
+     │ 11. lib/magentic_market/verticals/rayswarm_mapping.rb                                                              │
+     │ 12. lib/magentic_market/verticals/registry.rb                                                                      │
+     │ 13. lib/magentic_market/verticals/seed_helper.rb                                                                   │
+     │ 14. lib/magentic_market/verticals/data/finance.rb                                                                  │
+     │ 15. lib/magentic_market/verticals/data/healthcare.rb                                                               │
+     │ 16. lib/magentic_market/verticals/data/energy.rb                                                                   │
+     │ 17. lib/magentic_market/verticals/data/industrial.rb                                                               │
+     │ 18. lib/magentic_market/verticals/data/consumer.rb                                                                 │
+     │ 19. lib/magentic_market/verticals/data/demographic.rb                                                              │
+     │ 20. lib/magentic_market/verticals/data/academic.rb                                                                 │
+     │ 21. test/test_helper.rb                                                                                            │
+     │ 22. test/magentic_market/verticals_test.rb                                                                         │
+     │ 23. test/magentic_market/registry_test.rb                                                                          │
+     │ 24. test/magentic_market/rayswarm_mapping_test.rb                                                                  │
+     │                                                                                                                    │
+     │ Files to Modify                                                                                                    │
+     │                                                                                                                    │
+     │ 1. services/marketplace/Gemfile — add gem                                                                          │
+     │ 2. services/marketplace/app/models/category.rb — use gem VERTICALS                                                 │
+     │ 3. services/marketplace/db/seeds.rb — use SeedHelper                                                               │
+     │ 4. services/partner/Gemfile — add gem                                                                              │
+     │ 5. services/partner/app/models/partner.rb — use gem VERTICALS                                                      │
+     │ 6. services/developer/Gemfile — add gem                                                                            │
+     │ 7. services/developer/app/models/certification.rb — use gem VERTICALS                                              │
+     │ 8. services/governance/Gemfile — add gem                                                                           │
+     │ 9. services/governance/db/seeds.rb — use SeedHelper for spoke committees                                           │
+     │ 10. CLAUDE.md — add to crosscutting concerns table                                                                 │
+     │ 11. .gitmodules — add submodule entry                                                                              │
+     │                                                                                                                    │
+     │ Verification                                                                                                       │
+     │                                                                                                                    │
+     │ 1. cd submodules/magentic-market-verticals && ruby -Ilib -e "require 'magentic-market-verticals'; puts             │
+     │ MagenticMarket::Verticals.slugs.inspect" — should print all 7                                                      │
+     │ 2. ruby -Ilib -e "require 'magentic-market-verticals'; puts                                                        │
+     │ MagenticMarket::Verticals.rayswarm_gems.map(&:gem_name).sort" — should print all 42 gem names                      │
+     │ 3. cd submodules/magentic-market-verticals && ruby -Ilib -Itest test/magentic_market/verticals_test.rb — all tests │
+     │  pass                                                                                                              │
+     │ 4. cd services/marketplace && bundle install && bin/rails db:seed — seeds 49 categories from gem 
