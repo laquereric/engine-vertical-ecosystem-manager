@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/magentic/market-verticals/"
+     xml:base="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/magentic/market-verticals/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:cat="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/">
+
+    <owl:Ontology rdf:about="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/magentic/market-verticals">
+        <rdfs:label>Magentic Market Verticals</rdfs:label>
+        <rdfs:comment>Master registry of 42 market verticals (7 categories x 6) with individual domain engine gems and ontology standard mappings.</rdfs:comment>
+    </owl:Ontology>
+
+    <owl:NamedIndividual rdf:about="#MagenticMarketVerticals">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#DomainRegistry"/>
+        <cat:repositoryName>magentic-market-verticals</cat:repositoryName>
+        <cat:repositoryUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/laquereric/magentic-market-verticals</cat:repositoryUrl>
+        <cat:layer>2.5</cat:layer>
+        <cat:belongsToLayer rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#Layer25"/>
+        <cat:dependsOn rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/core/#RayswarmCore"/>
+        <cat:dependsOn rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/scoping/#RayswarmScoping"/>
+        <cat:purpose>Master registry of 42 verticals (7 categories x 6), individual domain engine gems</cat:purpose>
+        <cat:techStack>Ruby</cat:techStack>
+        <cat:provides rdf:resource="#VerticalRegistry"/>
+        <cat:provides rdf:resource="#FinanceCategory"/>
+        <cat:provides rdf:resource="#HealthcareCategory"/>
+        <cat:provides rdf:resource="#EnergyCategory"/>
+        <cat:provides rdf:resource="#IndustrialCategory"/>
+        <cat:provides rdf:resource="#ConsumerCategory"/>
+        <cat:provides rdf:resource="#DemographicCategory"/>
+        <cat:provides rdf:resource="#AcademicCategory"/>
+    </owl:NamedIndividual>
+
+    <!-- Components -->
+    <owl:NamedIndividual rdf:about="#VerticalRegistry">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#Component"/>
+        <rdfs:label>Vertical Registry</rdfs:label>
+        <rdfs:comment>Central registry of all 42 verticals with metadata, ontology standard mappings, and seed helpers.</rdfs:comment>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#FinanceCategory">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#Component"/>
+        <rdfs:label>Finance</rdfs:label>
+        <rdfs:comment>6 verticals: Algorithmic Trading, Financial Risk, KYC/AML, Insurance Claims, Wealth Advisory, Fraud Detection. Standards: FIBO, ACORD.</rdfs:comment>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#HealthcareCategory">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#Component"/>
+        <rdfs:label>Healthcare</rdfs:label>
+        <rdfs:comment>6 verticals: Clinical Decisions, Medical Imaging, Healthcare Claims, Drug Discovery, Patient Engagement, Population Health. Standards: HL7 FHIR, SNOMED.</rdfs:comment>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#EnergyCategory">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#Component"/>
+        <rdfs:label>Energy</rdfs:label>
+        <rdfs:comment>6 verticals: Subsurface Exploration, Reservoir Optimization, Grid Management, Renewable Forecasting, Energy Assets, Commodity Futures. Standards: OSDU, CIM.</rdfs:comment>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#IndustrialCategory">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#Component"/>
+        <rdfs:label>Industrial</rdfs:label>
+        <rdfs:comment>6 verticals: Predictive Quality, Production Scheduling, Supply Chain, Industrial Robotics, Digital Twin, Equipment Health. Standards: ISA-95, IOF.</rdfs:comment>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#ConsumerCategory">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#Component"/>
+        <rdfs:label>Consumer</rdfs:label>
+        <rdfs:comment>6 verticals: Personalization, Dynamic Pricing, Inventory Optimization, Customer Analytics, Retail Execution, Ad Optimization. Standard: GS1.</rdfs:comment>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#DemographicCategory">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#Component"/>
+        <rdfs:label>Demographic</rdfs:label>
+        <rdfs:comment>6 verticals: Census Analysis, Economic Forecasting, Social Programs, Public Health, Policy Simulation, Survey Analysis. Standard: Schema.org.</rdfs:comment>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="#AcademicCategory">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#Component"/>
+        <rdfs:label>Academic</rdfs:label>
+        <rdfs:comment>6 verticals: Research Discovery, Adaptive Learning, Student Success, Curriculum Mapping, Library Services, Institutional Analytics. Standards: VIVO, 1EdTech.</rdfs:comment>
+    </owl:NamedIndividual>
+
+</rdf:RDF>
