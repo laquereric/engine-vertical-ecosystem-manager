@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "vertical_ecosystem_manager/version"
+require_relative "vertical_ecosystem_manager/engine" if defined?(Rails)
 require_relative "vertical_ecosystem_manager/ontology_standard"
 require_relative "vertical_ecosystem_manager/rayswarm_mapping"
 require_relative "vertical_ecosystem_manager/category"
