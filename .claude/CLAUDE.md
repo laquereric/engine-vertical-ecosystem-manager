@@ -1,45 +1,36 @@
-# Magentic Market Verticals
+# Vertical Ecosystem Manager — Agent Context
 
-Composite gem (Layer 2.5) providing the master registry of 42 market verticals across 7 categories, each with its own domain engine gem.
+## Project Purpose
 
-## Key Components
+Ruby gem (vertical-ecosystem-manager) providing the master registry of 42 market verticals across 7 categories, each with its own domain engine gem.
 
-- **Registry** — Central registry of all 42 verticals with metadata
-- **Value Objects** — Vertical, Category, OntologyStandard, RayswarmMapping
-- **Seed Helper** — Database population helper for host applications
-- **42 Domain Engine Gems** — Individual Rails engine gems per vertical
+## Architecture Overview
 
-## 7 Categories (6 verticals each)
+- Pure Ruby gem with module namespace: VerticalEcosystemManager
+- Value objects: Vertical, Category, OntologyStandard, RayswarmMapping
+- Registry pattern for vertical lookup
+- Seed helper for database population
 
-| Category | Verticals |
-|----------|-----------|
-| **Finance** | Algorithmic Trading, Financial Risk, KYC/AML Compliance, Insurance Claims, Wealth Advisory, Fraud Detection |
-| **Healthcare** | Clinical Decisions, Medical Imaging, Healthcare Claims, Drug Discovery, Patient Engagement, Population Health |
-| **Energy** | Subsurface Exploration, Reservoir Optimization, Grid Management, Renewable Forecasting, Energy Assets, Commodity Futures |
-| **Industrial** | Predictive Quality, Production Scheduling, Supply Chain, Industrial Robotics, Digital Twin, Equipment Health |
-| **Consumer** | Personalization, Dynamic Pricing, Inventory Optimization, Customer Analytics, Retail Execution, Ad Optimization |
-| **Demographic** | Census Analysis, Economic Forecasting, Social Programs, Public Health, Policy Simulation, Survey Analysis |
-| **Academic** | Research Discovery, Adaptive Learning, Student Success, Curriculum Mapping, Library Services, Institutional Analytics |
+## Core Classes
 
-## Structure
+| Class | File | Role |
+|-------|------|------|
+| VerticalEcosystemManager::Registry | lib/vertical_ecosystem_manager/registry.rb | Central registry |
+| VerticalEcosystemManager::Vertical | lib/vertical_ecosystem_manager/vertical.rb | Vertical value object |
+| VerticalEcosystemManager::Category | lib/vertical_ecosystem_manager/category.rb | Category value object |
+| VerticalEcosystemManager::SeedHelper | lib/vertical_ecosystem_manager/seed_helper.rb | DB seed helper |
 
-- `lib/magentic_market/verticals/` — Main gem (registry, value objects, seed helper)
-- `verticals/rayswarm-*/` — 42 individual domain engine gems (each with README, CLAUDE.md, Gemfile, VERSION, routes.rb)
+## Directory Layout
 
-## Ontology Standards per Category
+```
+lib/vertical_ecosystem_manager/  # Core gem code (registry, value objects)
+verticals/                       # 7 vertical data files (finance, healthcare, etc.)
+test/                            # Minitest suite
+```
 
-- **Finance**: FIBO, ACORD
-- **Healthcare**: HL7 FHIR, SNOMED
-- **Energy**: OSDU, CIM
-- **Industrial**: ISA-95, IOF
-- **Consumer**: GS1
-- **Demographic**: Schema.org
-- **Academic**: VIVO, 1EdTech
+## Development Commands
 
-## Ontology
-
-- **File**: `ontology.rdf`
-- **Namespace**: `http://www.semanticweb.org/ericlaquer/ontologies/2026/1/magentic/market-verticals/`
-- **Type**: `DomainRegistry` (Layer 2.5)
-- **Components**: VerticalRegistry, 7 CategoryGroups
-- **Depends on**: rayswarm-core, rayswarm-scoping
+```bash
+bundle install              # Install deps
+bundle exec rake test       # Run all tests
+```

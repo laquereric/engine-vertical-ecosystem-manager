@@ -2,22 +2,22 @@
 
 require_relative "../test_helper"
 
-class MagenticMarket::Verticals::RegistryTest < Minitest::Test
+class VerticalEcosystemManager::RegistryTest < Minitest::Test
   def setup
-    @registry = MagenticMarket::Verticals::Registry.new
-    @vertical = MagenticMarket::Verticals::Vertical.new(
+    @registry = VerticalEcosystemManager::Registry.new
+    @vertical = VerticalEcosystemManager::Vertical.new(
       slug: "test",
       name: "Test",
       description: "A test vertical",
       icon: "test-icon",
       categories: [
-        MagenticMarket::Verticals::Category.new(
+        VerticalEcosystemManager::Category.new(
           slug: "test_cat",
           name: "Test Category",
           description: "A test category",
           vertical_slug: "test",
           rayswarm_mappings: [
-            MagenticMarket::Verticals::RayswarmMapping.new(
+            VerticalEcosystemManager::RayswarmMapping.new(
               gem_name: "rayswarm-test",
               category_slug: "test_cat",
               vertical_slug: "test",

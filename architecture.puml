@@ -8,9 +8,9 @@ skinparam component {
   BorderColor<<Gem>> #F57C00
 }
 
-title magentic-market-verticals\nLayer 2.5 — Domain Engines
+title vertical-ecosystem-manager\nLayer 2.5 — Domain Engines
 
-package "magentic-market-verticals" <<Gem>> {
+package "vertical-ecosystem-manager" <<Gem>> {
   component "Vertical Registry" as VerticalRegistry
 
   package "Finance (FIBO, ACORD)" {
@@ -49,12 +49,6 @@ VerticalRegistry --> Industrial
 VerticalRegistry --> Consumer
 VerticalRegistry --> Demographic
 VerticalRegistry --> Academic
-
-component "rayswarm-core" as RayswarmCore #F5F5F5
-component "rayswarm-scoping" as RayswarmScoping #F5F5F5
-
-MagenticMarketVerticals ..> RayswarmCore : depends on
-MagenticMarketVerticals ..> RayswarmScoping : depends on
 
 caption 42 market verticals (7 categories x 6) with ontology standard mappings
 @enduml

@@ -1,6 +1,6 @@
 graph TD
 
-  subgraph MagenticMarketVerticals["magentic-market-verticals"]
+  subgraph VerticalEcosystemManager["vertical-ecosystem-manager"]
     VerticalRegistry["Vertical Registry"]
 
     subgraph Finance["Finance (FIBO, ACORD)"]
@@ -39,10 +39,5 @@ graph TD
   VerticalRegistry --> C1
   VerticalRegistry --> D1
   VerticalRegistry --> A1
-
-  RayswarmCore["rayswarm-core"]:::dep
-  RayswarmScoping["rayswarm-scoping"]:::dep
-  MagenticMarketVerticals --> RayswarmCore
-  MagenticMarketVerticals --> RayswarmScoping
 
   classDef dep fill:#f5f5f5,stroke:#999,stroke-dasharray:5,5

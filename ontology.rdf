@@ -15,7 +15,7 @@
 
     <owl:NamedIndividual rdf:about="#MagenticMarketVerticals">
         <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#DomainRegistry"/>
-        <cat:repositoryName>magentic-market-verticals</cat:repositoryName>
+        <cat:repositoryName>vertical-ecosystem-manager</cat:repositoryName>
         <cat:repositoryUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/laquereric/magentic-market-verticals</cat:repositoryUrl>
         <cat:layer>2.5</cat:layer>
         <cat:belongsToLayer rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#Layer25"/>
