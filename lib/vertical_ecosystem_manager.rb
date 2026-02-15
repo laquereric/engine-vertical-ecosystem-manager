@@ -8,13 +8,12 @@ require_relative "vertical_ecosystem_manager/category"
 require_relative "vertical_ecosystem_manager/vertical"
 require_relative "vertical_ecosystem_manager/registry"
 
-require_relative "../../../containers/finance"
-require_relative "../../../containers/healthcare"
-require_relative "../../../containers/energy"
-require_relative "../../../containers/industrial"
-require_relative "../../../containers/consumer"
-require_relative "../../../containers/demographic"
-require_relative "../../../containers/academic"
+require_relative "../../../containers/vertical-finance/finance"
+require_relative "../../../containers/vertical_healthcare/healthcare"
+require_relative "../../../containers/vertical_energy/energy"
+require_relative "../../../containers/verical_industry/industrial"
+require_relative "../../../containers/vertical-consumer/consumer"
+require_relative "../../../containers/vertical-academic/academic"
 
 module VerticalEcosystemManager
   LAYER = "2.5"
@@ -26,7 +25,6 @@ module VerticalEcosystemManager
   @registry.register(Data::Energy::VERTICAL)
   @registry.register(Data::Industrial::VERTICAL)
   @registry.register(Data::Consumer::VERTICAL)
-  @registry.register(Data::Demographic::VERTICAL)
   @registry.register(Data::Academic::VERTICAL)
 
   class << self

@@ -1,0 +1,43 @@
+<% content_for :brand do %>
+  <span class="text-lg font-semibold text-gray-900">Vertical Ecosystem</span>
+<% end %>
+
+<div class="mb-6">
+  <h1 class="text-2xl font-bold text-gray-900">Vertical Manager</h1>
+  <p class="mt-1 text-sm text-gray-500">Browse industry verticals, categories, and ontology standards.</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+  <%= ds_card title: "Verticals" do %>
+    <div class="text-3xl font-bold text-gray-900"><%= @total_verticals %></div>
+    <p class="text-sm text-gray-500">Industry verticals</p>
+  <% end %>
+
+  <%= ds_card title: "Categories" do %>
+    <div class="text-3xl font-bold text-gray-900"><%= @total_categories %></div>
+    <p class="text-sm text-gray-500">Sub-categories across all verticals</p>
+  <% end %>
+
+  <%= ds_card title: "Ontology Standards" do %>
+    <div class="text-3xl font-bold text-gray-900"><%= @total_standards %></div>
+    <p class="text-sm text-gray-500">Standards across all verticals</p>
+  <% end %>
+</div>
+
+<h2 class="text-lg font-semibold text-gray-900 mb-4">Verticals</h2>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <% @verticals.each do |vertical| %>
+    <%= ds_card title: vertical.name, subtitle: vertical.description do %>
+      <div class="flex items-center gap-2 mb-3">
+        <%= ds_badge label: "#{vertical.categories.size} categories", color: :blue %>
+        <%= ds_badge label: "#{vertical.ontology_standards.size} standards", color: :purple %>
+      </div>
+      <div class="mt-4">
+        <%= link_to "View Details &rarr;".html_safe,
+            vertical_path(slug: vertical.slug),
+            class: "text-sm font-medium text-primary-600 hover:text-primary-800" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
