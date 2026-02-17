@@ -14,4 +14,6 @@ Gem::Specification.new do |spec|
 
   spec.files         = Dir["{app,config,db,lib}/**/*", "verticals/**/*.rb", "VERSION", "LICENSE.txt"]
   spec.require_paths = ["lib"]
+
+  spec.add_dependency "view_component", ">= 3.0"
 end
