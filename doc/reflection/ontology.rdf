@@ -22,6 +22,7 @@
         <cat:engineNamespace>VerticalEcosystemManager</cat:engineNamespace>
         <cat:purpose>Canonical vertical market definitions for the ecosystem</cat:purpose>
         <cat:techStack>Ruby, Rails Engine</cat:techStack>
+        <cat:dependsOn rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/view_component/#ViewComponent"/>
     </owl:NamedIndividual>
 
 </rdf:RDF>

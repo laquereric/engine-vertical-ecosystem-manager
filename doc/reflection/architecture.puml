@@ -13,7 +13,13 @@ skinparam component {
 title vertical-ecosystem-manager\nCanonical vertical market definitions for the ecosystem
 
 package "vertical-ecosystem-manager" <<Engine>> {
+  component "DashboardController" as DashboardController
+  component "VerticalsController" as VerticalsController
 }
+
+component "view_component" as ViewComponent #F5F5F5
+
+VerticalEcosystemManager ..> ViewComponent : depends on
 
 caption Canonical vertical market definitions for the ecosystem
 @enduml
