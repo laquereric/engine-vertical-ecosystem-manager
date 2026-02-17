@@ -1,0 +1,28 @@
+<% content_for :brand do %>
+  <span class="text-lg font-semibold text-gray-900">Vertical Ecosystem</span>
+<% end %>
+
+<div class="mb-6">
+  <div class="flex items-center gap-3 mb-2">
+    <%= link_to "&larr; Back to Dashboard".html_safe, root_path,
+        class: "text-sm text-gray-500 hover:text-gray-700" %>
+  </div>
+  <h1 class="text-2xl font-bold text-gray-900">Verticals</h1>
+  <p class="mt-1 text-sm text-gray-500">Browse the <%= @verticals.size %> industry verticals and their categories.</p>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <% @verticals.each do |vertical| %>
+    <%= ds_card title: vertical.name, subtitle: vertical.description do %>
+      <div class="flex items-center gap-2 mb-3">
+        <%= ds_badge label: "#{vertical.categories.size} categories", color: :blue %>
+        <%= ds_badge label: "#{vertical.ontology_standards.size} standards", color: :purple %>
+      </div>
+      <div class="mt-4">
+        <%= link_to "View Details &rarr;".html_safe,
+            vertical_path(slug: vertical.slug),
+            class: "text-sm font-medium text-primary-600 hover:text-primary-800" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
