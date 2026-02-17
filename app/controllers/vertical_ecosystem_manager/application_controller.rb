@@ -2,6 +2,6 @@
 
 module VerticalEcosystemManager
   class ApplicationController < ActionController::Base
-    layout "rayswarm_design_system/application"
+    layout "engine_design_system/application"
   end
 end
