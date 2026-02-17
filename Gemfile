@@ -8,3 +8,9 @@ group :test do
   gem "minitest", "~> 5.0"
   gem "rake", "~> 13.0"
 end
+
+eco_root = __dir__
+eco_root = File.dirname(eco_root) until File.exist?("#{eco_root}/Gemfile.eco")
+eval_gemfile "#{eco_root}/Gemfile.eco"
+
+eco_gem "engine-design-system"
