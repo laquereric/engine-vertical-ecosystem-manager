@@ -1,0 +1,19 @@
+@startuml architecture
+!theme plain
+
+skinparam component {
+  BackgroundColor<<Engine>> #E1F5FE
+  BorderColor<<Engine>> #0288D1
+  BackgroundColor<<Gem>> #FFF3E0
+  BorderColor<<Gem>> #F57C00
+  BackgroundColor<<Model>> #E8F5E9
+  BorderColor<<Model>> #388E3C
+}
+
+title vertical-ecosystem-manager\nCanonical vertical market definitions for the ecosystem
+
+package "vertical-ecosystem-manager" <<Engine>> {
+}
+
+caption Canonical vertical market definitions for the ecosystem
+@enduml

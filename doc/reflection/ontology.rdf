@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/vertical/ecosystem/manager/"
+     xml:base="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/vertical/ecosystem/manager/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:cat="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/">
+
+    <owl:Ontology rdf:about="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/vertical/ecosystem/manager">
+        <rdfs:label>Canonical vertical market definitions for the ecosystem</rdfs:label>
+        <rdfs:comment>Single source-of-truth for 7 verticals, 42 categories, ontology standards, </rdfs:comment>
+    </owl:Ontology>
+
+    <!-- Repository Individual -->
+    <owl:NamedIndividual rdf:about="#VerticalEcosystemManager">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ericlaquer/ontologies/2026/1/rayswarm/catalog/#RaySwarmEngine"/>
+        <cat:repositoryName>vertical-ecosystem-manager</cat:repositoryName>
+        <cat:repositoryUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/laquereric/vertical-ecosystem-manager</cat:repositoryUrl>
+        <cat:gemName>vertical-ecosystem-manager</cat:gemName>
+        <cat:engineNamespace>VerticalEcosystemManager</cat:engineNamespace>
+        <cat:purpose>Canonical vertical market definitions for the ecosystem</cat:purpose>
+        <cat:techStack>Ruby, Rails Engine</cat:techStack>
+    </owl:NamedIndividual>
+
+</rdf:RDF>
