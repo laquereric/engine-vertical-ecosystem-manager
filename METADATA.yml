@@ -1,0 +1,7 @@
+---
+type: engine
+name: vertical-ecosystem-manager
+path: top/engine
+gitlink: https://github.com/laquereric/magentic-market-verticals.git
+repo_urls:
+  github: https://github.com/laquereric/magentic-market-verticals
