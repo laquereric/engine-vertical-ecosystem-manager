@@ -33,11 +33,13 @@
 
   <!-- Navigation bar -->
   <div class="flex items-center justify-between mb-6">
-    <a href="../../doc/reflection/catalog.html" class="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-      Catalog
-    </a>
-    <a href="vscode://file//Users/ericlaquer/Documents/GitHub/ecosystems/domain/vertical/engine/vertical-ecosystem-manager" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-primary-700 bg-primary-50 rounded-lg hover:bg-primary-100 transition-colors border border-primary-200">
+    <div class="flex items-center gap-3">
+      <a href="../../../../../doc/reflection/catalog.html" class="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Catalog
+      </a>
+    </div>
+    <a href="vscode://file//Users/ericlaquer/Documents/GitHub/ecosystems/top/engine/engine-vertical-ecosystem-user" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-primary-700 bg-primary-50 rounded-lg hover:bg-primary-100 transition-colors border border-primary-200">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
       Open in VS Code
     </a>
@@ -49,42 +51,80 @@
       <h1 class="text-2xl font-bold text-gray-900">vertical-ecosystem-manager</h1>
       <p class="text-gray-500 mt-1">Canonical vertical market definitions for the ecosystem</p>
       <div class="flex flex-wrap gap-2 mt-3">
-        <span class="inline-flex items-center font-medium rounded-full px-2.5 py-0.5 text-xs bg-primary-100 text-primary-700">v0.3.0</span>
+        <span class="inline-flex items-center font-medium rounded-full px-2.5 py-0.5 text-xs bg-primary-100 text-primary-700">v0.4.1</span>
         <span class="inline-flex items-center font-medium rounded-full px-2.5 py-0.5 text-xs bg-gray-100 text-gray-700">VerticalEcosystemManager</span>
         <span class="inline-flex items-center font-medium rounded-full px-2.5 py-0.5 text-xs bg-green-100 text-green-700">2 controllers</span>
       </div>
-      <div class="text-xs text-gray-400 mt-2 font-mono">domain/vertical/engine/vertical-ecosystem-manager</div>
+      <div class="text-xs text-gray-400 mt-2 font-mono">top/engine/engine-vertical-ecosystem-user</div>
     </div>
   </div>
 
+
+
+
+  <!-- Tab navigation -->
+  <div class="border-b border-gray-200 mb-6">
+    <nav class="flex flex-wrap gap-1 -mb-px" role="tablist">
+      <button onclick="switchTab('description')" id="tab-description"
+              class="tab-btn inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 transition-colors
+                     border-primary-500 text-primary-700 bg-white"
+              role="tab" aria-selected="true">
+        Description
+      </button>
+      <button onclick="switchTab('deps')" id="tab-deps"
+              class="tab-btn inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 transition-colors
+                     border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              role="tab" aria-selected="false">
+        Dependencies
+        <span class="inline-flex items-center font-medium rounded-full px-1.5 py-0.5 text-xs bg-gray-100 text-gray-600">1</span>
+      </button>
+      <button onclick="switchTab('controllers')" id="tab-controllers"
+              class="tab-btn inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 transition-colors
+                     border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              role="tab" aria-selected="false">
+        Controllers
+        <span class="inline-flex items-center font-medium rounded-full px-1.5 py-0.5 text-xs bg-gray-100 text-gray-600">2</span>
+      </button>
+      <button onclick="switchTab('routes')" id="tab-routes"
+              class="tab-btn inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 transition-colors
+                     border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              role="tab" aria-selected="false">
+        Routes
+        <span class="inline-flex items-center font-medium rounded-full px-1.5 py-0.5 text-xs bg-gray-100 text-gray-600">2</span>
+      </button>
+      <button onclick="switchTab('architecture')" id="tab-architecture"
+              class="tab-btn inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 transition-colors
+                     border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              role="tab" aria-selected="false">
+        Architecture
+      </button>
+    </nav>
+  </div>
+
+  <!-- Description -->
+  <div id="panel-description" class="tab-panel">
   <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-6">
-    <div class="p-4 sm:p-6 border-b border-gray-100">
-      <h2 class="text-lg font-semibold text-gray-900">Description</h2>
+    <div class="p-4 sm:p-6">
+      <p class="text-sm text-gray-700">Canonical vertical market definitions for the ecosystem</p>
+      <p class="text-sm text-gray-600 mt-2">Single source-of-truth for 7 verticals, 42 categories, ontology standards, </p>
     </div>
-    <div class="p-4 sm:p-6 text-sm text-gray-700">Single source-of-truth for 7 verticals, 42 categories, ontology standards, </div>
+  </div>
   </div>
 
-  <!-- Section nav -->
-  <div class="flex flex-wrap gap-2 mb-6">
-<a href="#deps" class="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-600 hover:bg-primary-50 hover:text-primary-700 transition-colors">Dependencies</a><a href="#controllers" class="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-600 hover:bg-primary-50 hover:text-primary-700 transition-colors">Controllers</a><a href="#routes" class="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-600 hover:bg-primary-50 hover:text-primary-700 transition-colors">Routes</a>    <a href="#architecture" class="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-600 hover:bg-primary-50 hover:text-primary-700 transition-colors">Architecture</a>
-  </div>
 
-  <div id="deps" class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-6">
-    <div class="p-4 sm:p-6 border-b border-gray-100">
-      <h2 class="text-lg font-semibold text-gray-900">Dependencies</h2>
-    </div>
+  <div id="panel-deps" class="tab-panel hidden">
+  <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-6">
     <div class="p-4 sm:p-6">
       <div class="flex flex-wrap gap-2">
-        <span class="inline-flex items-center font-medium rounded-full px-2.5 py-0.5 text-xs bg-amber-100 text-amber-700">view_component ~&gt; 3.0</span>
+        <span class="inline-flex items-center font-medium rounded-full px-2.5 py-0.5 text-xs bg-amber-100 text-amber-700">view_component</span>
       </div>
     </div>
   </div>
+  </div>
 
 
-  <div id="controllers" class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-6">
-    <div class="p-4 sm:p-6 border-b border-gray-100">
-      <h2 class="text-lg font-semibold text-gray-900">Controllers</h2>
-    </div>
+  <div id="panel-controllers" class="tab-panel hidden">
+  <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-6">
     <div class="divide-y divide-gray-100">
       <div class="p-4 sm:p-6">
         <div class="flex items-start justify-between">
@@ -92,7 +132,7 @@
             <span class="text-gray-400 font-normal">VerticalEcosystemManager::</span>
             DashboardController
           </h3>
-          <a href="vscode://file//Users/ericlaquer/Documents/GitHub/ecosystems/domain/vertical/engine/vertical-ecosystem-manager/app/controllers/vertical_ecosystem_manager/dashboard_controller.rb" class="flex-shrink-0 ml-2 text-gray-400 hover:text-primary-600 transition-colors" title="Open in VS Code">
+          <a href="vscode://file//Users/ericlaquer/Documents/GitHub/ecosystems/top/engine/engine-vertical-ecosystem-user/app/controllers/vertical_ecosystem_manager/dashboard_controller.rb" class="flex-shrink-0 ml-2 text-gray-400 hover:text-primary-600 transition-colors" title="Open in VS Code">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
           </a>
         </div>
@@ -107,7 +147,7 @@
             <span class="text-gray-400 font-normal">VerticalEcosystemManager::</span>
             VerticalsController
           </h3>
-          <a href="vscode://file//Users/ericlaquer/Documents/GitHub/ecosystems/domain/vertical/engine/vertical-ecosystem-manager/app/controllers/vertical_ecosystem_manager/verticals_controller.rb" class="flex-shrink-0 ml-2 text-gray-400 hover:text-primary-600 transition-colors" title="Open in VS Code">
+          <a href="vscode://file//Users/ericlaquer/Documents/GitHub/ecosystems/top/engine/engine-vertical-ecosystem-user/app/controllers/vertical_ecosystem_manager/verticals_controller.rb" class="flex-shrink-0 ml-2 text-gray-400 hover:text-primary-600 transition-colors" title="Open in VS Code">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
           </a>
         </div>
@@ -119,27 +159,30 @@
       </div>
     </div>
   </div>
+  </div>
 
-  <div id="routes" class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-6">
-    <div class="p-4 sm:p-6 border-b border-gray-100">
-      <h2 class="text-lg font-semibold text-gray-900">Routes</h2>
-    </div>
+  <div id="panel-routes" class="tab-panel hidden">
+  <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-6">
     <div class="p-4 sm:p-6 space-y-1">
       <div class="font-mono text-sm">
         <span class="inline-block min-w-[5rem] font-semibold uppercase
  text-gray-500
-">resource</span>
-        <span class="text-gray-900">verticals</span>
-        <span class="text-gray-400">only: [:index, :show], param: :slug</span>
+">namespace</span>
+        <span class="text-gray-900">api</span>
+      </div>
+      <div class="font-mono text-sm">
+        <span class="inline-block min-w-[5rem] font-semibold uppercase
+ text-gray-500
+">namespace</span>
+        <span class="text-gray-900">v1</span>
       </div>
     </div>
   </div>
+  </div>
 
 
-  <div id="architecture" class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-6">
-    <div class="p-4 sm:p-6 border-b border-gray-100">
-      <h2 class="text-lg font-semibold text-gray-900">Architecture</h2>
-    </div>
+  <div id="panel-architecture" class="tab-panel hidden">
+  <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-6">
     <div class="p-4 sm:p-6 text-center overflow-x-auto">
       <pre class="mermaid">
 graph TD
@@ -153,20 +196,56 @@ graph TD
   VerticalEcosystemManager --> view_component
 
   classDef dep fill:#f5f5f5,stroke:#999,stroke-dasharray:5,5
+  classDef atom fill:#dbeafe,stroke:#2563eb,color:#1e40af
+  classDef molecule fill:#dcfce7,stroke:#16a34a,color:#15803d
+  classDef organism fill:#fef3c7,stroke:#d97706,color:#b45309
+  classDef template fill:#f3e8ff,stroke:#9333ea,color:#7e22ce
 
       </pre>
     </div>
   </div>
+  </div>
+
 
   <footer class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400">
-    Generated by <strong>refection</strong> v0.1.0 &mdash; 2026-02-16 11:45
+    Generated by <strong>refection</strong> v0.4.1 &mdash; 2026-02-17 13:55
   </footer>
 
 </div>
 
+<script>
+var mermaidRendered = false;
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.add('hidden'); });
+  var panel = document.getElementById('panel-' + name);
+  if (panel) panel.classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    b.classList.remove('border-primary-500', 'text-primary-700', 'bg-white');
+    b.classList.add('border-transparent', 'text-gray-500');
+    b.setAttribute('aria-selected', 'false');
+  });
+  var btn = document.getElementById('tab-' + name);
+  if (btn) {
+    btn.classList.add('border-primary-500', 'text-primary-700', 'bg-white');
+    btn.classList.remove('border-transparent', 'text-gray-500');
+    btn.setAttribute('aria-selected', 'true');
+  }
+  if ((name === 'architecture' || name === 'sequence') && !mermaidRendered) {
+    mermaidRendered = true;
+    if (window._mermaidReady) window._mermaidReady();
+  }
+}
+</script>
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+  mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+  window._mermaidReady = function() {
+    mermaid.run({ querySelector: '.mermaid' });
+  };
+  if (document.querySelector('.tab-btn[aria-selected="true"]')?.id?.includes('architecture') ||
+      document.querySelector('.tab-btn[aria-selected="true"]')?.id?.includes('sequence')) {
+    window._mermaidReady();
+  }
 </script>
 </body>
 </html>
