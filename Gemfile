@@ -14,5 +14,5 @@ eco_root = File.dirname(eco_root) until File.exist?("#{eco_root}/Gemfile.eco")
 eval_gemfile "#{eco_root}/Gemfile.eco"
 
 eco_gem "engine-design-system"
-eco_gem "heartbeat"
-eco_gem "platform"
+eco_gem "library-heartbeat"
+eco_gem "library-platform"

@@ -2,7 +2,7 @@
 
 module EngineVerticalEcosystemManager
   class HeartBeatExecution < ApplicationRecord
-    include Heartbeat::HeartBeatExecutionConcern
+    include LibraryHeartbeat::HeartBeatExecutionConcern
 
     self.table_name = "vertical_ecosystem_manager_heartbeat_executions"
   end

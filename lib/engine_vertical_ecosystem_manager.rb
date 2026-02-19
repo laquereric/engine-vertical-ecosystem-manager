@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "platform"
+require "library_platform"
 require_relative "engine_vertical_ecosystem_manager/version"
 require_relative "engine_vertical_ecosystem_manager/engine" if defined?(Rails)
 require_relative "engine_vertical_ecosystem_manager/ontology_standard"

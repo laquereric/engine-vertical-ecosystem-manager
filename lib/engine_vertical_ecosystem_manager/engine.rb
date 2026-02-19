@@ -3,7 +3,7 @@
 module EngineVerticalEcosystemManager
   class Engine < ::Rails::Engine
     isolate_namespace EngineVerticalEcosystemManager
-      include Platform::AppendMigrations
+      include LibraryPlatform::AppendMigrations
 
   end
 end
