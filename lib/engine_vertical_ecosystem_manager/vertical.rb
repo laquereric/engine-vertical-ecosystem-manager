@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module VerticalEcosystemManager
+module EngineVerticalEcosystemManager
   class Vertical
     attr_reader :slug, :name, :description, :icon, :ontology_standards, :categories
 

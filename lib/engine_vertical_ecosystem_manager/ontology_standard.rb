@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module VerticalEcosystemManager
+module EngineVerticalEcosystemManager
   class OntologyStandard
     attr_reader :name, :full_name, :iri, :governance_body
 

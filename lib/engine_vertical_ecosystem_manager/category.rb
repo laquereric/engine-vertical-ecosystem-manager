@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module VerticalEcosystemManager
+module EngineVerticalEcosystemManager
   class Category
     attr_reader :slug, :name, :description, :vertical_slug, :rayswarm_mappings
 

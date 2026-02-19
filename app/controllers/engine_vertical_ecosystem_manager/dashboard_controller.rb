@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module VerticalEcosystemManager
+module EngineVerticalEcosystemManager
   class DashboardController < ApplicationController
     def index
-      @verticals = VerticalEcosystemManager.all
+      @verticals = EngineVerticalEcosystemManager.all
       @total_verticals = @verticals.size
       @total_categories = @verticals.sum { |v| v.categories.size }
       @total_standards = @verticals.sum { |v| v.ontology_standards.size }

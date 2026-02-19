@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/vertical_ecosystem_manager/version"
+require_relative "lib/engine_vertical_ecosystem_manager/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "vertical-ecosystem-manager"
-  spec.version       = VerticalEcosystemManager::VERSION
+  spec.name          = "engine-vertical-ecosystem-manager"
+  spec.version       = EngineVerticalEcosystemManager::VERSION
   spec.authors       = ["Eric Laquer"]
   spec.summary       = "Canonical vertical market definitions for the ecosystem"
   spec.description   = "Single source-of-truth for 7 verticals, 42 categories, ontology standards, " \

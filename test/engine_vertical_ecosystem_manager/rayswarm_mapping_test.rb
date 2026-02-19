@@ -2,24 +2,24 @@
 
 require_relative "../test_helper"
 
-class VerticalEcosystemManager::RayswarmMappingTest < Minitest::Test
+class EngineVerticalEcosystemManager::RayswarmMappingTest < Minitest::Test
   def test_rayswarm_gems_returns_42_mappings
-    assert_equal 42, VerticalEcosystemManager.rayswarm_gems.size
+    assert_equal 42, EngineVerticalEcosystemManager.rayswarm_gems.size
   end
 
   def test_all_gem_names_are_unique
-    names = VerticalEcosystemManager.rayswarm_gems.map(&:gem_name)
+    names = EngineVerticalEcosystemManager.rayswarm_gems.map(&:gem_name)
     assert_equal names.uniq.size, names.size, "Duplicate gem names found: #{names.group_by(&:itself).select { |_, v| v.size > 1 }.keys}"
   end
 
   def test_all_gem_names_start_with_rayswarm
-    VerticalEcosystemManager.rayswarm_gems.each do |mapping|
+    EngineVerticalEcosystemManager.rayswarm_gems.each do |mapping|
       assert mapping.gem_name.start_with?("rayswarm-"), "#{mapping.gem_name} should start with rayswarm-"
     end
   end
 
   def test_mapping_vertical_slug_matches_parent
-    VerticalEcosystemManager.all.each do |vert|
+    EngineVerticalEcosystemManager.all.each do |vert|
       vert.categories.each do |cat|
         cat.rayswarm_mappings.each do |mapping|
           assert_equal vert.slug, mapping.vertical_slug,
@@ -32,7 +32,7 @@ class VerticalEcosystemManager::RayswarmMappingTest < Minitest::Test
   end
 
   def test_mapping_to_h
-    mapping = VerticalEcosystemManager.rayswarm_gems.first
+    mapping = EngineVerticalEcosystemManager.rayswarm_gems.first
     hash = mapping.to_h
     assert_kind_of Hash, hash
     assert hash.key?(:gem_name)
@@ -42,7 +42,7 @@ class VerticalEcosystemManager::RayswarmMappingTest < Minitest::Test
   end
 
   def test_finance_has_expected_gems
-    finance = VerticalEcosystemManager.find("finance")
+    finance = EngineVerticalEcosystemManager.find("finance")
     gem_names = finance.categories.flat_map(&:rayswarm_mappings).map(&:gem_name).sort
     expected = %w[
       rayswarm-algorithmic-trading

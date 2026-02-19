@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module VerticalEcosystemManager
+module EngineVerticalEcosystemManager
   class HeartBeatExecution < ApplicationRecord
     include Heartbeat::HeartBeatExecutionConcern
 

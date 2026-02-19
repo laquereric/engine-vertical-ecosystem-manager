@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-module VerticalEcosystemManager
+module EngineVerticalEcosystemManager
   class VerticalsController < ApplicationController
     def index
-      @verticals = VerticalEcosystemManager.all
+      @verticals = EngineVerticalEcosystemManager.all
     end
 
     def show
-      @vertical = VerticalEcosystemManager.find(params[:slug])
+      @vertical = EngineVerticalEcosystemManager.find(params[:slug])
       head :not_found unless @vertical
     end
   end

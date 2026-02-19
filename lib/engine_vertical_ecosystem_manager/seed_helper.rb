@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module VerticalEcosystemManager
+module EngineVerticalEcosystemManager
   module SeedHelper
     # Seeds categories into a Rails model.
     #
@@ -8,11 +8,11 @@ module VerticalEcosystemManager
     #   slug, name, description, vertical (string)
     #
     # Usage:
-    #   require "vertical_ecosystem_manager/seed_helper"
-    #   VerticalEcosystemManager::SeedHelper.seed_categories!(Category)
+    #   require "engine_vertical_ecosystem_manager/seed_helper"
+    #   EngineVerticalEcosystemManager::SeedHelper.seed_categories!(Category)
     #
     def self.seed_categories!(model)
-      VerticalEcosystemManager.categories.each do |cat|
+      EngineVerticalEcosystemManager.categories.each do |cat|
         model.find_or_create_by!(slug: cat.slug) do |record|
           record.name = cat.name
           record.description = cat.description
@@ -27,11 +27,11 @@ module VerticalEcosystemManager
     #   slug, name, description
     #
     # Usage:
-    #   require "vertical_ecosystem_manager/seed_helper"
-    #   VerticalEcosystemManager::SeedHelper.seed_committees!(Committee)
+    #   require "engine_vertical_ecosystem_manager/seed_helper"
+    #   EngineVerticalEcosystemManager::SeedHelper.seed_committees!(Committee)
     #
     def self.seed_committees!(model)
-      VerticalEcosystemManager.all.each do |vert|
+      EngineVerticalEcosystemManager.all.each do |vert|
         model.find_or_create_by!(slug: vert.slug) do |record|
           record.name = vert.name
           record.description = vert.description

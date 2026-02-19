@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe "VerticalEcosystemManager::VerticalsController", type: :controller do
+RSpec.describe "EngineVerticalEcosystemManager::VerticalsController", type: :controller do
   pending "#index"
   pending "#show"
 end

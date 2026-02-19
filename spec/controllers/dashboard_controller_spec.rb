@@ -2,6 +2,6 @@
 
 require "spec_helper"
 
-RSpec.describe "VerticalEcosystemManager::DashboardController", type: :controller do
+RSpec.describe "EngineVerticalEcosystemManager::DashboardController", type: :controller do
   pending "#index"
 end

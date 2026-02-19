@@ -2,22 +2,22 @@
 
 require_relative "../test_helper"
 
-class VerticalEcosystemManager::RegistryTest < Minitest::Test
+class EngineVerticalEcosystemManager::RegistryTest < Minitest::Test
   def setup
-    @registry = VerticalEcosystemManager::Registry.new
-    @vertical = VerticalEcosystemManager::Vertical.new(
+    @registry = EngineVerticalEcosystemManager::Registry.new
+    @vertical = EngineVerticalEcosystemManager::Vertical.new(
       slug: "test",
       name: "Test",
       description: "A test vertical",
       icon: "test-icon",
       categories: [
-        VerticalEcosystemManager::Category.new(
+        EngineVerticalEcosystemManager::Category.new(
           slug: "test_cat",
           name: "Test Category",
           description: "A test category",
           vertical_slug: "test",
           rayswarm_mappings: [
-            VerticalEcosystemManager::RayswarmMapping.new(
+            EngineVerticalEcosystemManager::RayswarmMapping.new(
               gem_name: "rayswarm-test",
               category_slug: "test_cat",
               vertical_slug: "test",
