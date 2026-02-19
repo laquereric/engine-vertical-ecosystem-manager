@@ -2,8 +2,8 @@
 type: engine
 name: vertical-ecosystem-manager
 path: top/engine
-gitlink: https://github.com/laquereric/magentic-market-verticals.git
+gitlink: https://github.com/laquereric/engine-vertical-ecosystem-manager.git
 repo_urls:
-  github: https://github.com/laquereric/magentic-market-verticals
+  github: https://github.com/laquereric/engine-vertical-ecosystem-manager
 team:
   - Marketing / Sales
